@@ -8,4 +8,7 @@ mason.setup()
 -- Server-spezifische Configs
 require("lsp.rust")
 require("lsp.csharp")
-require("lsp.c")      --  ⇦ neu
+require("lsp.c")
+require("lsp.web") 
+require("lsp.markdown")  
+require("lsp.java")  

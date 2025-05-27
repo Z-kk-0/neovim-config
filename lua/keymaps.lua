@@ -54,3 +54,6 @@ map("v", "<C-a>", "<Esc>ggVG")
 
 ---Neogit
 map("n", "<C-g>", ":Neogit<CR>")
+
+--- Markdown preview
+map('n', '<leader>mp', ':MarkdownPreviewToggle<CR>', { desc = 'Markdown Preview' })

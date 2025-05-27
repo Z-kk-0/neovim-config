@@ -88,5 +88,19 @@ require("lazy").setup({
         require("bufferline").setup{}
         end,
     },
+    {
+          "iamcco/markdown-preview.nvim",
+          build = "cd app && npm ci",   -- braucht npm/Node ≥ 14
+          ft    = { "markdown" },
+          init  = function()
+        vim.g.mkdp_auto_start = 1   -- Browser-Preview beim Öffnen
+        vim.g.mkdp_port       = "6688"
+      end,
+    },
+
+    { "JoosepAlviste/nvim-ts-context-commentstring" },
+    { "windwp/nvim-ts-autotag", ft = { "html", "javascriptreact", "typescriptreact" } },
+    { "mfussenegger/nvim-jdtls", ft = { "java" } },
+
 })
   
