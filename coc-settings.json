@@ -1,0 +1,26 @@
+{
+  "suggest.noselect": false,
+  "suggest.enablePreselect": true,
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.formatOnType": true,
+  "diagnostic.enable": true,
+  "diagnostic.displayByAle": false,
+  "diagnostic.virtualText": true,
+
+  "rust-analyzer": {
+    "cargo": {
+      "allFeatures": true
+    },
+    "checkOnSave": {
+      "command": "clippy"
+    }
+  },
+
+  "javascript.suggestionActions.enabled": true,
+  "typescript.suggestionActions.enabled": true,
+
+  "java.configuration.updateBuildConfiguration": "interactive",
+
+  "markdown-preview-enhanced.previewTheme": "github-light",
+  "markdown-preview-enhanced.scrollSync": true
+}

@@ -1,9 +1,9 @@
 local theme = require("theme")
 
 local function map(mode, lhs, rhs, opts)
-  opts = opts or {}
-  local options = vim.tbl_extend("force", { noremap = true, silent = true }, opts)
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    opts = opts or {}
+    local options = vim.tbl_extend("force", { noremap = true, silent = true }, opts)
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 
@@ -17,6 +17,8 @@ map('n', '<C-t>', ':ToggleTerm<CR>')
 map('n', '<M-j>', ':lua require("theme").set_light()<CR>')
 map('n', '<M-k>', ':lua require("theme").set_dark()<CR>')
 map('n', '<M-l>', ':lua require("theme").set_kde()<CR>')
+map('n', '<M-h>', ':lua require("theme").set_githublight()<CR>')
+
 
 -- Window navigation
 map('n', '<Tab>', '<C-w>w')
@@ -56,4 +58,33 @@ map("v", "<C-a>", "<Esc>ggVG")
 map("n", "<C-g>", ":Neogit<CR>")
 
 --- Markdown preview
-map('n', '<leader>mp', ':MarkdownPreviewToggle<CR>', { desc = 'Markdown Preview' })
+map('n', '<M-m>', ':MarkdownPreviewToggle<CR>', { desc = 'Markdown Preview' })
+
+--- Quick Fix
+vim.keymap.set({ "n", "v" }, "<A-q>",
+    vim.lsp.buf.code_action,
+    { desc = "Quick Fix" })
+
+-- CoC Code-Action für Cursor / Auswahl
+vim.keymap.set({ "n", "v" }, "<A-q>a", "<Plug>(coc-codeaction-selected)",
+    { silent = true, noremap = false, desc = "CoC Code Action" })
+-- CoC Diagnostic-Fix (z. B. Organize Imports) optional
+vim.keymap.set("n", "<A-q>d", "<Plug>(coc-fix-current)",
+    { silent = true, noremap = false, desc = "CoC Fix Current" })
+
+
+
+-- CoC Mappings
+vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)', { silent = true })
+vim.keymap.set('n', '<M-CR>', '<Plug>(coc-codeaction)', { silent = true })
+vim.keymap.set('n', 'gd', '<Plug>(coc-definition)', { silent = true })
+vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
+vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
+vim.keymap.set('n', 'gr', '<Plug>(coc-references)', { silent = true })
+vim.keymap.set('n', 'K', ':call CocActionAsync("doHover")<CR>', { silent = true })
+vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)', { silent = true })
+vim.keymap.set('n', ']g', '<Plug>(coc-diagnostic-next)', { silent = true })
+vim.keymap.set('n', '<M-q>', ':copen<CR>', { silent = true }) -- Quickfix alt-q
+--Use <CR> to confirm completion or insert newline
+vim.keymap.set("i", "<CR>", [[pumvisible() ? coc#_select_confirm() : "\<CR>"]],
+    { noremap = true, silent = true, expr = true })
