@@ -7,4 +7,4 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.mouse = "a"
 
-require("theme").set_kde()
+require("theme").set_miles()

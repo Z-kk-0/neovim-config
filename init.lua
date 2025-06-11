@@ -19,4 +19,3 @@ require("utils")
 require("theme")
 require("treesitter")
 require("autocmds")
-

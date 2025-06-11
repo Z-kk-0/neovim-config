@@ -38,6 +38,7 @@ require("lazy").setup({
                 },
             })
 
+
             -- Update NvimTree when directory changed (Terminal → Tree sync)
             vim.api.nvim_create_autocmd("DirChanged", {
                 callback = function()
@@ -82,7 +83,7 @@ require("lazy").setup({
     },
     {
         "iamcco/markdown-preview.nvim",
-        build = "cd app && npm ci",   -- braucht npm/Node ≥ 14
+        build = "cd app && npm ci", -- braucht npm/Node ≥ 14
         ft    = { "markdown" },
         init  = function()
             vim.g.mkdp_auto_start = 1 -- Browser-Preview beim Öffnen
@@ -167,9 +168,21 @@ require("lazy").setup({
             })
             vim.cmd("colorscheme github_light")
         end
-    }
+    },
+
+    {
+        "illegalleft/honeywell.vim",
+        lazy = false,
+        priority = 1000,
+    },
 
 
+    {
+        "goolord/alpha-nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("alphaconfig")
+        end,
+    },
 
 })
-

@@ -22,5 +22,6 @@
   "java.configuration.updateBuildConfiguration": "interactive",
 
   "markdown-preview-enhanced.previewTheme": "github-light",
-  "markdown-preview-enhanced.scrollSync": true
+  "markdown-preview-enhanced.scrollSync": true,
+  "javascript.autoClosingTags": false
 }

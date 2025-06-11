@@ -14,8 +14,8 @@ map('n', '<C-n>', ':NvimTreeToggle<CR>')
 map('n', '<C-t>', ':ToggleTerm<CR>')
 
 -- Themes (ALT + JKL → stabil)
-map('n', '<M-j>', ':lua require("theme").set_light()<CR>')
-map('n', '<M-k>', ':lua require("theme").set_dark()<CR>')
+map('n', '<M-j>', ':lua require("theme").set_miles_light()<CR>')
+map('n', '<M-k>', ':lua require("theme").set_miles()<CR>')
 map('n', '<M-l>', ':lua require("theme").set_kde()<CR>')
 map('n', '<M-h>', ':lua require("theme").set_githublight()<CR>')
 
