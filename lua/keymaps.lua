@@ -1,5 +1,5 @@
 local theme = require("theme")
-
+local dap = require("dap")
 local function map(mode, lhs, rhs, opts)
     opts = opts or {}
     local options = vim.tbl_extend("force", { noremap = true, silent = true }, opts)
@@ -60,40 +60,76 @@ map("n", "<C-g>", ":Neogit<CR>")
 --- Markdown preview
 map('n', '<M-m>', ':MarkdownPreviewToggle<CR>', { desc = 'Markdown Preview' })
 
---- Quick Fix
-vim.keymap.set({ "n", "v" }, "<A-q>",
-    vim.lsp.buf.code_action,
-    { desc = "Quick Fix" })
-
 -- CoC Code-Action für Cursor / Auswahl
+
 vim.keymap.set({ "n", "v" }, "<A-q>a", "<Plug>(coc-codeaction-selected)",
     { silent = true, noremap = false, desc = "CoC Code Action" })
+
 -- CoC Diagnostic-Fix (z. B. Organize Imports) optional
+
 vim.keymap.set("n", "<A-q>d", "<Plug>(coc-fix-current)",
+
     { silent = true, noremap = false, desc = "CoC Fix Current" })
 
-
-
 -- CoC Mappings
+
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)', { silent = true })
+
 vim.keymap.set('n', '<M-CR>', '<Plug>(coc-codeaction)', { silent = true })
+
 vim.keymap.set('n', 'gd', '<Plug>(coc-definition)', { silent = true })
+
 vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
+
 vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
+
 vim.keymap.set('n', 'gr', '<Plug>(coc-references)', { silent = true })
+
 vim.keymap.set('n', 'K', ':call CocActionAsync("doHover")<CR>', { silent = true })
+
 vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)', { silent = true })
+
 vim.keymap.set('n', ']g', '<Plug>(coc-diagnostic-next)', { silent = true })
+
 vim.keymap.set('n', '<M-q>', ':copen<CR>', { silent = true }) -- Quickfix alt-q
+
 --Use <CR> to confirm completion or insert newline
+
 vim.keymap.set("i", "<CR>", [[pumvisible() ? coc#_select_confirm() : "\<CR>"]],
     { noremap = true, silent = true, expr = true })
---Dap 
+-- Basisfunktion für alle DAP-Shortcuts über <C-d> Prefix
+local dap = require("dap")
 
-vim.keymap.set("n", "<F5>", function() dap.continue() end, { desc = "Start/Continue Debugging" })
-vim.keymap.set("n", "<F10>", function() dap.step_over() end, { desc = "Step Over" })
-vim.keymap.set("n", "<F11>", function() dap.step_into() end, { desc = "Step Into" })
-vim.keymap.set("n", "<F12>", function() dap.step_out() end, { desc = "Step Out" })
-vim.keymap.set("n", "<Leader>F1", function() dap.toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
-vim.keymap.set("n", "<Leader>F2", function() dap.repl.open() end, { desc = "Open REPL" })
+local opts = { noremap = true, silent = true, desc = "" }
 
+-- <C-d>d → Start / Continue Debugging
+vim.keymap.set("n", "<C-d>d", function() dap.continue() end,
+    vim.tbl_extend("force", opts, { desc = "Start/Continue Debugging" }))
+
+-- <C-d>n → Step Over
+vim.keymap.set("n", "<C-d>n", function() dap.step_over() end, vim.tbl_extend("force", opts, { desc = "Step Over" }))
+
+-- <C-d>i → Step Into
+vim.keymap.set("n", "<C-d>i", function() dap.step_into() end, vim.tbl_extend("force", opts, { desc = "Step Into" }))
+
+-- <C-d>o → Step Out
+vim.keymap.set("n", "<C-d>o", function() dap.step_out() end, vim.tbl_extend("force", opts, { desc = "Step Out" }))
+
+-- <C-d>b → Toggle Breakpoint
+vim.keymap.set("n", "<C-d>b", function() dap.toggle_breakpoint() end,
+    vim.tbl_extend("force", opts, { desc = "Toggle Breakpoint" }))
+
+-- <C-d>B → Conditional Breakpoint
+vim.keymap.set("n", "<C-d>B", function()
+    dap.set_breakpoint(vim.fn.input("Condition: "))
+end, vim.tbl_extend("force", opts, { desc = "Conditional Breakpoint" }))
+
+-- <C-d>r → Toggle REPL
+vim.keymap.set("n", "<C-d>r", function() dap.repl.toggle() end, vim.tbl_extend("force", opts, { desc = "Toggle REPL" }))
+
+-- <C-d>u → Toggle DAP UI
+vim.keymap.set("n", "<C-d>u", function() dapui.toggle() end, vim.tbl_extend("force", opts, { desc = "Toggle UI" }))
+
+-- <C-d>q → Beenden
+vim.keymap.set("n", "<C-d>q", function() dap.terminate() end,
+    vim.tbl_extend("force", opts, { desc = "Terminate Debugging" }))
